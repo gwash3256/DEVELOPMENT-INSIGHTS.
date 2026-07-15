@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "@/components/shared/Container";
 import Logo from "@/components/shared/Logo";
@@ -8,6 +8,34 @@ import Logo from "@/components/shared/Logo";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Initialize dark mode from localStorage and system preference
+  useEffect(() => {
+    setMounted(true);
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark;
+    setIsDark(shouldBeDark);
+    applyTheme(shouldBeDark);
+  }, []);
+
+  const applyTheme = (dark: boolean) => {
+    const html = document.documentElement;
+    if (dark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  };
+
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    applyTheme(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+  };
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -15,6 +43,8 @@ export default function Navbar() {
     { label: "Resources", href: "/resources" },
     { label: "About", href: "/about" },
   ];
+
+  if (!mounted) return null;
 
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-slate-900 shadow-sm border-b border-gray-200 dark:border-slate-800">
@@ -60,7 +90,7 @@ export default function Navbar() {
 
             {/* Theme Toggle */}
             <button
-              onClick={() => setIsDark(!isDark)}
+              onClick={toggleTheme}
               className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Toggle theme"
             >
