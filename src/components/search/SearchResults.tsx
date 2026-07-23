@@ -1,6 +1,7 @@
 import { Article } from "@/data/articles";
 import Link from "next/link";
 import { Clock, Calendar, ImageOff } from "lucide-react";
+import SearchHighlight from "@/components/search/SearchHighlight";
 
 interface SearchResultsProps {
   results: Article[];
@@ -53,12 +54,12 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
 
               {/* Title */}
               <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 mb-1">
-                {article.title}
+                <SearchHighlight text={article.title} query={query} />
               </h3>
 
               {/* Excerpt */}
               <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-2">
-                {article.excerpt}
+                <SearchHighlight text={article.excerpt} query={query} />
               </p>
 
               {/* Meta row */}
