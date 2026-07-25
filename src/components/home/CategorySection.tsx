@@ -1,6 +1,6 @@
 import Container from "@/components/shared/Container";
 import Link from "next/link";
-import { categories } from "@/data/articles";
+import { categories } from "@/data/categories";
 
 export default function CategorySection() {
   return (
@@ -21,7 +21,7 @@ export default function CategorySection() {
           {categories.map((category) => (
             <Link
               key={category.name}
-              href={`/category/${category.name.toLowerCase().replace(" ", "-")}`}
+              href={`/categories/${category.slug}`}
             >
               <div className="group h-full p-8 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg dark:hover:shadow-blue-900/20 transition-all duration-300 cursor-pointer">
                 {/* Icon */}

@@ -13,7 +13,7 @@ export default function ArticleCard({
   const isFeatured = variant === "featured";
 
   return (
-    <Link href={`/articles/${article.id}`}>
+    <Link href={`/articles/${article.slug}`}>
       <article
         className={`
           group h-full rounded-lg overflow-hidden border transition-all duration-300
