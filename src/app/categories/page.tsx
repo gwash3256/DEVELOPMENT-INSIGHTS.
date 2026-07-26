@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Container from "@/components/shared/Container";
 import CategoryCard from "@/components/category/CategoryCard";
+import Breadcrumb from "@/components/article/Breadcrumb";
 import { categories } from "@/data/categories";
 
 export const metadata: Metadata = {
@@ -12,11 +13,17 @@ export const metadata: Metadata = {
 export default function CategoriesPage() {
   const totalArticles = categories.reduce((sum, c) => sum + c.count, 0);
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Categories", href: "/categories" },
+  ];
+
   return (
     <>
       {/* Hero */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-black border-b border-gray-200 dark:border-slate-800">
         <Container>
+          <Breadcrumb items={breadcrumbItems} />
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Browse by Category
