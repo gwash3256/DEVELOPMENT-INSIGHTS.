@@ -1,5 +1,7 @@
 import { Article, getArticleAuthor } from "@/data/articles";
+import { articles } from "@/data/articles";
 import TagList from "@/components/article/TagList";
+import AuthorProfile from "@/components/authors/AuthorProfile";
 
 interface ArticleMetadataProps {
   article: Article;
@@ -7,32 +9,24 @@ interface ArticleMetadataProps {
 
 export default function ArticleMetadata({ article }: ArticleMetadataProps) {
   const author = getArticleAuthor(article);
+  const articleCount = author
+    ? articles.filter((a) => a.authorId === author.id).length
+    : undefined;
 
   return (
     <div className="space-y-6 py-6 border-y border-gray-200 dark:border-slate-700">
-      {/* Author and Date */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="flex-1">
-          {author ? (
-            <>
-              <p className="font-semibold text-gray-900 dark:text-white mb-1">
-                {author.name}
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {author.bio}
-              </p>
-            </>
-          ) : (
-            <p className="font-semibold text-gray-900 dark:text-white mb-1">
-              Unknown author
-            </p>
-          )}
-        </div>
-        <div className="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
-          <time dateTime={article.date}>{article.date}</time>
-          {" • "}
-          <span>{article.readTime} min read</span>
-        </div>
+      {/* Author */}
+      {author ? (
+        <AuthorProfile author={author} articleCount={articleCount} variant="compact" />
+      ) : (
+        <p className="font-semibold text-gray-900 dark:text-white">Unknown author</p>
+      )}
+
+      {/* Date + reading time */}
+      <div className="text-sm text-gray-500 dark:text-gray-500">
+        <time dateTime={article.date}>{article.date}</time>
+        {" • "}
+        <span>{article.readTime} min read</span>
       </div>
 
       {/* Tags */}
