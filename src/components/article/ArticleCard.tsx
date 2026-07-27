@@ -1,4 +1,4 @@
-import { Article } from "@/data/articles";
+import { Article, getArticleAuthor } from "@/data/articles";
 import Link from "next/link";
 
 interface ArticleCardProps {
@@ -11,6 +11,7 @@ export default function ArticleCard({
   variant = "default",
 }: ArticleCardProps) {
   const isFeatured = variant === "featured";
+  const author = getArticleAuthor(article);
 
   return (
     <Link href={`/articles/${article.slug}`}>
@@ -77,7 +78,7 @@ export default function ArticleCard({
           {/* Footer */}
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500 pt-3 border-t border-gray-200 dark:border-slate-700">
             <div className="flex items-center gap-2">
-              <span>{article.author}</span>
+              <span>{author?.name ?? "Unknown"}</span>
               <span>•</span>
               <span>{article.date}</span>
             </div>

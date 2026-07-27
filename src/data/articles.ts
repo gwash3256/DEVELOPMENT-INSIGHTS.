@@ -1,3 +1,6 @@
+import { getAuthorById } from "@/data/authors";
+import type { Author } from "@/types/author";
+
 export interface Article {
   id: string;
   slug: string;
@@ -6,12 +9,21 @@ export interface Article {
   content: string;
   category: string;
   tags: string[];
-  author: string;
-  authorBio?: string;
+  /** References Author.id in src/data/authors.ts */
+  authorId: string;
   date: string;
   readTime: number;
   image?: string;
   featured?: boolean;
+}
+
+/**
+ * Resolve the full Author record for an article.
+ * Returns undefined if the authorId doesn't match any known author —
+ * callers should handle this gracefully.
+ */
+export function getArticleAuthor(article: Article): Author | undefined {
+  return getAuthorById(article.authorId);
 }
 
 export const articles: Article[] = [
@@ -23,8 +35,7 @@ export const articles: Article[] = [
       "Learn how to build fast, scalable web applications with Next.js 16. This comprehensive guide covers routing, SSR, and deployment strategies.",
     category: "Web Development",
     tags: ["nextjs", "react", "javascript", "web development"],
-    author: "Sarah Chen",
-    authorBio: "Full-stack developer with 8+ years of experience building scalable web applications.",
+    authorId: "sarah-chen",
     date: "2026-07-15",
     readTime: 8,
     featured: true,
@@ -91,8 +102,7 @@ Next.js 16 is production-ready and battle-tested. Whether you're building a star
       "Explore advanced TypeScript patterns and techniques to build maintainable, type-safe applications that scale across large teams.",
     category: "Web Development",
     tags: ["typescript", "type safety", "best practices", "javascript"],
-    author: "Marcus Johnson",
-    authorBio: "TypeScript expert and open-source contributor with focus on type systems.",
+    authorId: "marcus-johnson",
     date: "2026-07-12",
     readTime: 12,
     featured: true,
@@ -165,8 +175,7 @@ TypeScript at scale requires discipline, but the payoff in code quality and team
       "Deep dive into Tailwind CSS v4 and learn how to create beautiful, responsive designs with utility-first styling.",
     category: "Web Development",
     tags: ["tailwind", "css", "design", "styling"],
-    author: "Emma Wilson",
-    authorBio: "Design systems engineer with 6+ years of UI/UX and frontend expertise.",
+    authorId: "emma-wilson",
     date: "2026-07-10",
     readTime: 10,
     featured: true,
@@ -252,8 +261,7 @@ Tailwind's JIT compiler ensures only used styles are generated, resulting in tin
       "Master MongoDB's flexible schema model with proven patterns for embedding, referencing, and polymorphic documents.",
     category: "Database",
     tags: ["mongodb", "database", "schema design", "data modeling"],
-    author: "David Kumar",
-    authorBio: "Database architect specializing in NoSQL systems and distributed data.",
+    authorId: "david-kumar",
     date: "2026-07-08",
     readTime: 15,
     featured: false,
@@ -325,8 +333,7 @@ Good schema design in MongoDB requires understanding your access patterns and qu
       "Learn how to leverage custom hooks to manage complex application state and side effects cleanly.",
     category: "Web Development",
     tags: ["react", "hooks", "state management", "javascript"],
-    author: "Lisa Park",
-    authorBio: "React specialist focused on scalable architecture and component design.",
+    authorId: "lisa-park",
     date: "2026-07-05",
     readTime: 11,
     featured: false,
@@ -417,8 +424,7 @@ Master hooks and you'll write cleaner, more maintainable React code.`,
       "Understand the core principles of modern DevOps practices and automate your deployment pipeline.",
     category: "DevOps",
     tags: ["devops", "ci/cd", "infrastructure", "automation"],
-    author: "James Rivera",
-    authorBio: "DevOps engineer with expertise in cloud infrastructure and automation.",
+    authorId: "james-rivera",
     date: "2026-07-01",
     readTime: 14,
     featured: false,
