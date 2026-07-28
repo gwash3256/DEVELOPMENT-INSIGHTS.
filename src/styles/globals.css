@@ -1,48 +1,206 @@
-
 @import "tailwindcss";
 
+/* ============================================================
+   EDITORIAL THEME TOKENS
+   Economist × Foreign Affairs × modern African digital
+   ============================================================ */
+
 :root {
-  --background: #c5b9b9;
-  --foreground: #171717;
+  /* Core palette */
+  --navy:        #0B1220;
+  --navy-light:  #152033;
+  --navy-muted:  #1E2D42;
+  --ivory:       #F7F4ED;
+  --ivory-dark:  #EDE9DF;
+  --gold:        #C9A227;
+  --gold-light:  #D9B84A;
+  --gold-dark:   #A8841A;
+
+  /* Semantic aliases */
+  --background:  var(--ivory);
+  --foreground:  var(--navy);
+  --surface:     #FFFFFF;
+  --border:      #D6D0C4;
+  --muted:       #7A7060;
+  --muted-light: #A09585;
+
+  /* Typography scale */
+  --font-serif:  var(--font-playfair), "Georgia", "Times New Roman", serif;
+  --font-sans:   var(--font-inter), system-ui, sans-serif;
+  --font-mono:   var(--font-geist-mono), "Courier New", monospace;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:  var(--background);
+  --color-foreground:  var(--foreground);
+  --color-navy:        var(--navy);
+  --color-navy-light:  var(--navy-light);
+  --color-navy-muted:  var(--navy-muted);
+  --color-ivory:       var(--ivory);
+  --color-ivory-dark:  var(--ivory-dark);
+  --color-gold:        var(--gold);
+  --color-gold-light:  var(--gold-light);
+  --color-gold-dark:   var(--gold-dark);
+  --color-surface:     var(--surface);
+  --color-border:      var(--border);
+  --color-muted:       var(--muted);
+  --font-serif:        var(--font-serif);
+  --font-sans:         var(--font-sans);
+  --font-mono:         var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark mode — navy surface, ivory text */
+.dark {
+  --background:  var(--navy);
+  --foreground:  var(--ivory);
+  --surface:     var(--navy-light);
+  --border:      var(--navy-muted);
+  --muted:       #8A9AB5;
+  --muted-light: #6A7A92;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Blob animation */
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+/* Serif headings across the site */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+/* Gold rule — decorative horizontal rule used in editorial sections */
+.rule-gold {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background-color: var(--gold);
+  border: none;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+/* Gold underline accent on section titles */
+.title-accent::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background-color: var(--gold);
+  margin-top: 0.75rem;
+}
+
+/* Focus ring — consistent across the site */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove default link underlines on nav/UI elements */
+a {
+  text-decoration: none;
+}
+
+/* ============================================================
+   PROSE OVERRIDES — article body
+   ============================================================ */
+
+.editorial-prose {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: var(--foreground);
+}
+
+.editorial-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.editorial-prose h1,
+.editorial-prose h2,
+.editorial-prose h3 {
+  font-family: var(--font-serif);
+  color: var(--foreground);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.editorial-prose h1 { font-size: 2rem; }
+.editorial-prose h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+.editorial-prose h3 { font-size: 1.2rem; }
+
+.editorial-prose strong {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.editorial-prose a {
+  color: var(--gold-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.editorial-prose a:hover {
+  color: var(--gold);
+}
+
+.editorial-prose ul,
+.editorial-prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-prose li {
+  margin-bottom: 0.4rem;
+}
+
+.editorial-prose blockquote {
+  border-left: 3px solid var(--gold);
+  padding-left: 1.25rem;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.editorial-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background-color: var(--ivory-dark);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.dark .editorial-prose code {
+  background-color: var(--navy-muted);
+}
+
+.editorial-prose pre {
+  background-color: #0D1117;
+  border: 1px solid var(--navy-muted);
+  border-radius: 6px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-prose pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: #E6EDF3;
 }
