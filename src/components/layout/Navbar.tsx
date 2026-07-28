@@ -225,7 +225,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex py-2.5 font-sans text-sm font-semibold text-[var(--foreground)] hover:text-[var(--gold-dark)] transition-colors"
+                  className="flex py-2.5 font-sans text-sm font-semibold text-[var(--foreground)] hover:opacity-70 transition-opacity"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}

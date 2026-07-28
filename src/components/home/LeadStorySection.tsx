@@ -8,7 +8,6 @@ interface LeadStorySectionProps {
   sectionLabel?: string;
 }
 
-/** Lead image placeholder when no photo is set */
 function ImagePlaceholder() {
   return (
     <div className="w-full h-full flex items-center justify-center bg-[var(--ivory-dark)] dark:bg-[var(--navy-muted)]">
@@ -17,20 +16,17 @@ function ImagePlaceholder() {
   );
 }
 
-export default function LeadStorySection({
-  lead,
-  briefs,
-  sectionLabel,
-}: LeadStorySectionProps) {
+export default function LeadStorySection({ lead, briefs, sectionLabel }: LeadStorySectionProps) {
   const leadAuthor = getArticleAuthor(lead);
 
   return (
     <section className="py-12 md:py-16 border-b border-[var(--border)]">
       <Container>
-        {/* Section label */}
+        {/* Section label — text is muted uppercase; gold is only the rule */}
         {sectionLabel && (
           <div className="flex items-center gap-3 mb-8">
-            <span className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)]">
+            <span className="h-px w-6 bg-[var(--gold-dark)] dark:bg-[var(--gold)] shrink-0" aria-hidden="true" />
+            <span className="font-sans text-[0.65rem] font-bold tracking-[0.18em] uppercase text-[var(--muted)]">
               {sectionLabel}
             </span>
             <span className="flex-1 h-px bg-[var(--border)]" aria-hidden="true" />
@@ -38,32 +34,29 @@ export default function LeadStorySection({
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-8">
-          {/* ── Lead story ─────────────────────────────────── */}
+          {/* Lead story */}
           <div className="lg:col-span-2 border-b lg:border-b-0 lg:border-r border-[var(--border)] pb-8 lg:pb-0 lg:pr-8">
             <Link href={`/articles/${lead.slug}`} className="group block">
-              {/* Image */}
               <div className="aspect-[16/9] overflow-hidden mb-5">
                 {lead.image
                   ? <img src={lead.image} alt={lead.title} className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
                   : <ImagePlaceholder />}
               </div>
 
-              {/* Category */}
-              <span className="font-sans text-[0.65rem] font-bold tracking-[0.14em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)]">
+              {/* Category — muted uppercase, no gold */}
+              <span className="font-sans text-[0.65rem] font-bold tracking-[0.16em] uppercase text-[var(--muted)]">
                 {lead.category}
               </span>
 
-              {/* Headline */}
-              <h2 className="font-serif text-2xl md:text-3xl font-bold text-[var(--navy)] dark:text-[var(--ivory)] group-hover:text-[var(--gold-dark)] dark:group-hover:text-[var(--gold-light)] transition-colors leading-snug mt-2 mb-3">
+              {/* Headline — hover darkens slightly, no gold jump */}
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-[var(--foreground)] group-hover:opacity-75 transition-opacity leading-snug mt-2 mb-3">
                 {lead.title}
               </h2>
 
-              {/* Excerpt */}
               <p className="font-sans text-base text-[var(--muted)] leading-relaxed line-clamp-3 mb-4">
                 {lead.excerpt}
               </p>
 
-              {/* Byline */}
               <div className="font-sans text-xs text-[var(--muted)] flex items-center gap-2">
                 <span>{leadAuthor?.name ?? "Staff writer"}</span>
                 <span aria-hidden="true">·</span>
@@ -74,7 +67,7 @@ export default function LeadStorySection({
             </Link>
           </div>
 
-          {/* ── Brief list ─────────────────────────────────── */}
+          {/* Brief list */}
           <div className="pt-8 lg:pt-0">
             <ul className="divide-y divide-[var(--border)]">
               {briefs.map((article) => {
@@ -82,10 +75,10 @@ export default function LeadStorySection({
                 return (
                   <li key={article.id} className="py-4 first:pt-0 last:pb-0">
                     <Link href={`/articles/${article.slug}`} className="group block">
-                      <span className="font-sans text-[0.6rem] font-bold tracking-[0.12em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)] block mb-1">
+                      <span className="font-sans text-[0.6rem] font-bold tracking-[0.14em] uppercase text-[var(--muted)] block mb-1">
                         {article.category}
                       </span>
-                      <h3 className="font-serif text-[1rem] font-bold text-[var(--navy)] dark:text-[var(--ivory)] group-hover:text-[var(--gold-dark)] dark:group-hover:text-[var(--gold-light)] transition-colors leading-snug line-clamp-3 mb-1.5">
+                      <h3 className="font-serif text-[1rem] font-bold text-[var(--foreground)] group-hover:opacity-75 transition-opacity leading-snug line-clamp-3 mb-1.5">
                         {article.title}
                       </h3>
                       <div className="font-sans text-[0.68rem] text-[var(--muted)] flex items-center gap-1.5">

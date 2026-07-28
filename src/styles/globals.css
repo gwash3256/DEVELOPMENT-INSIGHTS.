@@ -6,25 +6,28 @@
    ============================================================ */
 
 :root {
-  /* Core palette */
+  /* Core palette — Economist × Foreign Affairs refinement */
   --navy:        #0B1220;
-  --navy-light:  #152033;
-  --navy-muted:  #1E2D42;
+  --navy-light:  #101722;   /* dark surface */
+  --navy-muted:  #26303D;   /* dark border */
+
   --ivory:       #F7F4ED;
   --ivory-dark:  #EDE9DF;
-  --gold:        #C9A227;
-  --gold-light:  #D9B84A;
-  --gold-dark:   #A8841A;
 
-  /* Semantic aliases */
-  --background:  var(--ivory);
-  --foreground:  var(--navy);
+  /* Gold is an accent only — lines, rules, active indicators */
+  --gold:        #D4AF37;   /* dark mode accent */
+  --gold-light:  #DBBE55;
+  --gold-dark:   #B18A24;   /* light mode accent */
+
+  /* Semantic — light mode */
+  --background:  #F7F4ED;
+  --foreground:  #0B1220;
   --surface:     #FFFFFF;
-  --border:      #D6D0C4;
-  --muted:       #7A7060;
-  --muted-light: #A09585;
+  --border:      #E5E0D6;
+  --muted:       #5F6570;
+  --muted-light: #8A9098;
 
-  /* Typography scale */
+  /* Typography */
   --font-serif:  var(--font-playfair), "Georgia", "Times New Roman", serif;
   --font-sans:   var(--font-inter), system-ui, sans-serif;
   --font-mono:   var(--font-geist-mono), "Courier New", monospace;
@@ -49,14 +52,15 @@
   --font-mono:         var(--font-mono);
 }
 
-/* Dark mode — navy surface, ivory text */
+/* Dark mode */
 .dark {
-  --background:  var(--navy);
-  --foreground:  var(--ivory);
-  --surface:     var(--navy-light);
-  --border:      var(--navy-muted);
-  --muted:       #8A9AB5;
+  --background:  #080D16;
+  --foreground:  #F4F1E8;
+  --surface:     #101722;
+  --border:      #26303D;
+  --muted:       #A7AFBC;
   --muted-light: #6A7A92;
+  /* gold stays the same — already reads well on dark */
 }
 
 /* ============================================================

@@ -5,7 +5,6 @@ import Container from "@/components/shared/Container";
 interface SectionStripProps {
   label: string;
   articles: Article[];
-  /** Optional "see all" href */
   seeAllHref?: string;
 }
 
@@ -15,9 +14,10 @@ export default function SectionStrip({ label, articles, seeAllHref }: SectionStr
   return (
     <section className="py-12 md:py-14 border-b border-[var(--border)]">
       <Container>
-        {/* Section header */}
+        {/* Section header — gold short rule, muted uppercase label */}
         <div className="flex items-center gap-3 mb-8">
-          <span className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)]">
+          <span className="h-px w-6 bg-[var(--gold-dark)] dark:bg-[var(--gold)] shrink-0" aria-hidden="true" />
+          <span className="font-sans text-[0.65rem] font-bold tracking-[0.18em] uppercase text-[var(--muted)]">
             {label}
           </span>
           <span className="flex-1 h-px bg-[var(--border)]" aria-hidden="true" />
@@ -31,19 +31,14 @@ export default function SectionStrip({ label, articles, seeAllHref }: SectionStr
           )}
         </div>
 
-        {/* Three-column story grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
           {articles.slice(0, 3).map((article, idx) => {
             const author = getArticleAuthor(article);
             const isFirst = idx === 0;
 
             return (
-              <div
-                key={article.id}
-                className="md:px-6 first:pl-0 last:pr-0 py-5 md:py-0"
-              >
+              <div key={article.id} className="md:px-6 first:pl-0 last:pr-0 py-5 md:py-0">
                 <Link href={`/articles/${article.slug}`} className="group block">
-                  {/* Image — only on the first card */}
                   {isFirst && article.image && (
                     <div className="aspect-[3/2] overflow-hidden mb-4">
                       <img
@@ -54,11 +49,12 @@ export default function SectionStrip({ label, articles, seeAllHref }: SectionStr
                     </div>
                   )}
 
-                  <span className="font-sans text-[0.6rem] font-bold tracking-[0.12em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)] block mb-2">
+                  {/* Category — muted, not gold */}
+                  <span className="font-sans text-[0.6rem] font-bold tracking-[0.14em] uppercase text-[var(--muted)] block mb-2">
                     {article.category}
                   </span>
 
-                  <h3 className="font-serif text-lg font-bold text-[var(--navy)] dark:text-[var(--ivory)] group-hover:text-[var(--gold-dark)] dark:group-hover:text-[var(--gold-light)] transition-colors leading-snug line-clamp-3 mb-2">
+                  <h3 className="font-serif text-lg font-bold text-[var(--foreground)] group-hover:opacity-75 transition-opacity leading-snug line-clamp-3 mb-2">
                     {article.title}
                   </h3>
 

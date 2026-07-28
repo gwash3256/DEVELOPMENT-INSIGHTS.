@@ -59,7 +59,7 @@ export default function Footer() {
           {/* Link sections */}
           {sections.map((section) => (
             <div key={section.heading}>
-              <h3 className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--gold)] mb-4">
+              <h3 className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--ivory)]/40 mb-4">
                 {section.heading}
               </h3>
               <ul className="space-y-2.5">
