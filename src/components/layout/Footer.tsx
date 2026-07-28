@@ -2,123 +2,90 @@ import Link from "next/link";
 import Container from "@/components/shared/Container";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
-  const quickLinks = [
-    { label: "Home", href: "/" },
-    { label: "Articles", href: "/articles" },
-    { label: "Resources", href: "/resources" },
-    { label: "Contact", href: "/contact" },
-  ];
-
-  const categories = [
-    { label: "Web Development", href: "/category/web" },
-    { label: "Mobile Development", href: "/category/mobile" },
-    { label: "DevOps", href: "/category/devops" },
-    { label: "Database", href: "/category/database" },
-  ];
-
-  const socials = [
-    { label: "Twitter", href: "#", icon: "𝕏" },
-    { label: "GitHub", href: "#", icon: "⚙" },
-    { label: "LinkedIn", href: "#", icon: "in" },
-    { label: "RSS", href: "#", icon: "≡" },
+  const sections = [
+    {
+      heading: "Coverage",
+      links: [
+        { label: "Politics & Governance", href: "/categories/governance" },
+        { label: "Technology", href: "/categories/web-development" },
+        { label: "Business & Economy", href: "/categories/database" },
+        { label: "DevOps & Infrastructure", href: "/categories/devops" },
+      ],
+    },
+    {
+      heading: "Publication",
+      links: [
+        { label: "All Articles", href: "/articles" },
+        { label: "Authors", href: "/authors" },
+        { label: "Categories", href: "/categories" },
+        { label: "Tags", href: "/tags" },
+      ],
+    },
+    {
+      heading: "About",
+      links: [
+        { label: "About Us", href: "/about" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
+        { label: "Contact", href: "/contact" },
+      ],
+    },
   ];
 
   return (
-    <footer className="bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
-      <Container className="py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Section */}
+    <footer className="bg-[var(--navy)] text-[var(--ivory)]">
+      {/* Top rule */}
+      <div className="h-0.5 bg-[var(--gold)]" />
+
+      <Container className="py-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Brand */}
           <div>
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-white font-bold text-sm">DI</span>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-7 h-7 bg-[var(--gold)] flex items-center justify-center">
+                <span className="text-[var(--navy)] font-serif font-bold text-xs select-none">DI</span>
+              </div>
+              <span className="font-serif font-bold text-base text-[var(--ivory)]">
+                Development Insights
+              </span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Development Insights — Your source for technical knowledge and best practices.
+            <p className="font-sans text-sm text-[var(--ivory)]/60 leading-relaxed">
+              Serious analysis of technology, governance, and the forces shaping our world.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Categories
-            </h3>
-            <ul className="space-y-2">
-              {categories.map((cat) => (
-                <li key={cat.href}>
-                  <Link
-                    href={cat.href}
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-                  >
-                    {cat.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Follow Us
-            </h3>
-            <div className="flex gap-4">
-              {socials.map((social) => (
-                <a
-                  key={social.href}
-                  href={social.href}
-                  className="w-10 h-10 rounded-lg bg-gray-200 dark:bg-slate-800 hover:bg-blue-500 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white transition-colors flex items-center justify-center text-sm font-bold"
-                  aria-label={social.label}
-                  title={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
+          {/* Link sections */}
+          {sections.map((section) => (
+            <div key={section.heading}>
+              <h3 className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--gold)] mb-4">
+                {section.heading}
+              </h3>
+              <ul className="space-y-2.5">
+                {section.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="font-sans text-sm text-[var(--ivory)]/60 hover:text-[var(--ivory)] transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-slate-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © {currentYear} Development Insights. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link
-                href="/privacy"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-              >
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+        {/* Bottom bar */}
+        <div className="border-t border-[var(--navy-muted)] pt-8 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p className="font-sans text-xs text-[var(--ivory)]/40">
+            © {year} Development Insights. All rights reserved.
+          </p>
+          <p className="font-sans text-xs text-[var(--ivory)]/40 italic">
+            &ldquo;Stay informed. Think critically.&rdquo;
+          </p>
         </div>
       </Container>
     </footer>

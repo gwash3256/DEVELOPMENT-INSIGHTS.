@@ -1,73 +1,48 @@
-import Container from "@/components/shared/Container";
 import Link from "next/link";
+import Container from "@/components/shared/Container";
 import { categories } from "@/data/categories";
 
 export default function CategorySection() {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-black">
+    <section className="py-12 border-b border-[var(--border)] bg-[var(--ivory-dark)] dark:bg-[var(--navy-light)]">
       <Container>
-        {/* Section Header */}
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Browse by Category
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-            Explore content organized by topic to find exactly what you're looking for.
-          </p>
+        <div className="flex items-center gap-3 mb-8">
+          <span className="font-sans text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--gold-dark)] dark:text-[var(--gold)]">
+            Browse by Topic
+          </span>
+          <span className="flex-1 h-px bg-[var(--border)]" aria-hidden="true" />
+          <Link
+            href="/categories"
+            className="font-sans text-[0.65rem] font-semibold tracking-[0.12em] uppercase text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          >
+            All topics →
+          </Link>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)]">
           {categories.map((category) => (
             <Link
-              key={category.name}
+              key={category.slug}
               href={`/categories/${category.slug}`}
+              className="group flex flex-col p-6 bg-[var(--background)] hover:bg-[var(--surface)] transition-colors"
             >
-              <div className="group h-full p-8 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg dark:hover:shadow-blue-900/20 transition-all duration-300 cursor-pointer">
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6.253v13m0-13C6.228 6.228 2 10.456 2 15.5c0 4.446 3.357 8.057 7.61 8.471M12 6.253c5.772 0 10 4.228 10 9.247m0 0c0 4.446-3.357 8.057-7.61 8.471"
-                    />
-                  </svg>
-                </div>
+              {/* Gold top rule on hover */}
+              <span
+                className="block h-0.5 w-0 group-hover:w-8 bg-[var(--gold)] transition-all duration-300 mb-4"
+                aria-hidden="true"
+              />
 
-                {/* Category Name */}
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {category.name}
-                </h3>
+              <h3 className="font-serif text-base font-bold text-[var(--navy)] dark:text-[var(--ivory)] group-hover:text-[var(--gold-dark)] dark:group-hover:text-[var(--gold-light)] transition-colors leading-snug mb-2">
+                {category.name}
+              </h3>
 
-                {/* Count */}
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {category.count} articles
-                </p>
+              <p className="font-sans text-xs text-[var(--muted)] mb-4 leading-relaxed line-clamp-2">
+                {category.description}
+              </p>
 
-                {/* Arrow */}
-                <div className="mt-4 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <span className="font-sans text-[0.65rem] font-bold tracking-[0.1em] uppercase text-[var(--muted)] group-hover:text-[var(--gold-dark)] dark:group-hover:text-[var(--gold)] transition-colors mt-auto">
+                {category.count} {category.count === 1 ? "article" : "articles"}
+              </span>
             </Link>
           ))}
         </div>
