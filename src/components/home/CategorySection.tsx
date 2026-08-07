@@ -29,7 +29,7 @@ export default function CategorySection() {
               href={`/categories/${category.slug}`}
               className="group flex flex-col p-6 bg-[var(--background)] hover:bg-[var(--surface)] transition-colors"
             >
-              {/* Gold rule animates in on hover — gold as accent, not text */}
+              {/* Gold rule animates in on hover: gold as accent, not text */}
               <span
                 className="block h-0.5 w-0 group-hover:w-8 bg-[var(--gold-dark)] dark:bg-[var(--gold)] transition-all duration-300 mb-4"
                 aria-hidden="true"
