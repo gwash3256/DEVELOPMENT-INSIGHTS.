@@ -40,7 +40,7 @@ export default function Newsletter() {
           </h2>
 
           <p className="font-sans text-sm text-[var(--ivory)]/60 mb-8 leading-relaxed max-w-sm">
-            Receive our weekly briefing — analysis, long-reads, and the stories that matter, delivered to your inbox.
+            Receive our weekly briefing/analysis, long-reads, and the stories that matter, delivered to your inbox.
           </p>
 
           {/* Form */}
